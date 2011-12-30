@@ -1,17 +1,20 @@
 Name:           perl-Sys-Virt
-Version:        0.2.4
+Version:        0.2.5
 Release:        1%{?dist}
 Summary:        Represent and manage a libvirt hypervisor connection
 License:        GPLv2+ or Artistic
 Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Sys-Virt/
 Source0:        http://www.cpan.org/authors/id/D/DA/DANBERR/Sys-Virt-%{version}.tar.gz
+Patch1:         Sys-Virt-%{version}-mem-unlimited.patch
+Patch2:         Sys-Virt-%{version}-hostname.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Test::Pod)
 BuildRequires:  perl(Test::Pod::Coverage)
 BuildRequires:  perl(XML::XPath)
-BuildRequires:  libvirt-devel >= 0.8.1
+BuildRequires:  perl(Time::HiRes)
+BuildRequires:  libvirt-devel >= 0.8.7
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -21,6 +24,8 @@ virtualization containers to be managed with a consistent API.
 
 %prep
 %setup -q -n Sys-Virt-%{version}
+%patch1 -p1
+%patch2 -p1
 
 sed -i -e '/Sys-Virt\.spec/d' Makefile.PL
 sed -i -e '/\.spec\.PL$/d' MANIFEST
@@ -55,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Fri Feb  4 2011 Daniel P. Berrange <berrange@redhat.com> - 0.2.5-1
+- Update to 0.2.5 release (rhbz #675120)
+
 * Wed May 19 2010 Daniel P. Berrange <berrange@redhat.com> - 0.2.4-1
 - Update to 0.2.4 release (rhbz #553291)
 

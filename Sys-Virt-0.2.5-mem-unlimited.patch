@@ -1,0 +1,42 @@
+diff -rup Sys-Virt-0.2.5.orig/lib/Sys/Virt/Domain.pm Sys-Virt-0.2.5.new/lib/Sys/Virt/Domain.pm
+--- Sys-Virt-0.2.5.orig/lib/Sys/Virt/Domain.pm	2011-02-04 15:32:02.000000000 +0000
++++ Sys-Virt-0.2.5.new/lib/Sys/Virt/Domain.pm	2011-02-04 16:20:23.261515085 +0000
+@@ -874,10 +874,6 @@ The minimum memory guaranteed to be rese
+ 
+ The maximum swap the guest can use.
+ 
+-=item Sys::Virt::Domain::MEMORY_PARAM_UNLIMITED
+-
+-The value that indicates "unlimited"
+-
+ =back
+ 
+ =head2 VCPU FLAGS
+diff -rup Sys-Virt-0.2.5.orig/t/020-constants.t Sys-Virt-0.2.5.new/t/020-constants.t
+--- Sys-Virt-0.2.5.orig/t/020-constants.t	2011-02-04 15:32:02.000000000 +0000
++++ Sys-Virt-0.2.5.new/t/020-constants.t	2011-02-04 16:29:40.198807676 +0000
+@@ -2,7 +2,7 @@
+ 
+ use strict;
+ use warnings;
+-use Test::More tests => 15;
++use Test::More tests => 14;
+ 
+ BEGIN {
+   use_ok("Sys::Virt") or die;
+@@ -22,4 +22,3 @@ is(Sys::Virt::Domain::MEMORY_HARD_LIMIT,
+ is(Sys::Virt::Domain::MEMORY_SOFT_LIMIT, "soft_limit", "soft limit");
+ is(Sys::Virt::Domain::MEMORY_MIN_GUARANTEE, "min_guarantee", "min guarantee");
+ is(Sys::Virt::Domain::MEMORY_SWAP_HARD_LIMIT, "swap_hard_limit", "swap hard limit");
+-is(Sys::Virt::Domain::MEMORY_PARAM_UNLIMITED, "9007199254740991", "param unlimited");
+diff -rup Sys-Virt-0.2.5.orig/Virt.xs Sys-Virt-0.2.5.new/Virt.xs
+--- Sys-Virt-0.2.5.orig/Virt.xs	2011-02-04 15:32:02.000000000 +0000
++++ Sys-Virt-0.2.5.new/Virt.xs	2011-02-04 16:20:15.031569869 +0000
+@@ -4078,7 +4078,6 @@ BOOT:
+       REGISTER_CONSTANT(VIR_DOMAIN_EVENT_GRAPHICS_ADDRESS_IPV6, EVENT_GRAPHICS_ADDRESS_IPV6);
+ 
+ 
+-      REGISTER_CONSTANT_ULL(VIR_DOMAIN_MEMORY_PARAM_UNLIMITED, MEMORY_PARAM_UNLIMITED);
+ 
+       REGISTER_CONSTANT_STR(VIR_DOMAIN_MEMORY_HARD_LIMIT, MEMORY_HARD_LIMIT);
+       REGISTER_CONSTANT_STR(VIR_DOMAIN_MEMORY_SOFT_LIMIT, MEMORY_SOFT_LIMIT);
