@@ -61,7 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Fri Feb  4 2011 Daniel P. Berrange <berrange@redhat.com> - 0.2.5-1
-- Update to 0.2.5 release (rhbz #675120)#
+- Update to 0.2.5 release (rhbz #675120)
 
 * Wed May 19 2010 Daniel P. Berrange <berrange@redhat.com> - 0.2.4-1
 - Update to 0.2.4 release (rhbz #553291)
